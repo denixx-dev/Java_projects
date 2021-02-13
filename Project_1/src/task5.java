@@ -9,7 +9,7 @@ public class task5 {
         try {
             x = a.nextBoolean();
         } catch (Exception e) {
-            System.out.println("Неверно введены даные");
+            System.out.println("Неверно введены данные");
         }
         boolean y = false;
         try {
