@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class task6 {
     public static void main(String[] args){
         Scanner scn = new Scanner(System.in);
+        System.out.print("Введите кол-во квадратных метров, ширину и высоту: ");
         int n = 0;
         int w = 0;
         int h = 0;

@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class task8 {
     public static void main (String[] args){
         Scanner scn = new Scanner(System.in);
+        System.out.print("Введите три числа: ");
         float prob = scn.nextFloat();
         int prize = scn.nextInt();
         int pay = scn.nextInt();
