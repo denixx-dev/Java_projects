@@ -11,9 +11,9 @@ public class task10 {
     public static int mod (int a, int b){
         int res =0;
         while (a >= b){
-            a= a -b;
-            res = a;
+            a -= b;
+            //res = a;
         }
-        return (res);
+        return (a);
     }
 }

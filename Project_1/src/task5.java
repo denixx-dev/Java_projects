@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class task5 {
     public static void main(String[] args){
-        Scanner a = new Scanner(System.in);
+        System.out.print(and(true,false));
+        /*Scanner a = new Scanner(System.in);
         System.out.println("Введите два булевых значение: ");
         boolean x = false;
         try {
@@ -17,16 +18,16 @@ public class task5 {
         } catch (Exception e) {
             System.out.println("Неверно введены данные");
         }
-        System.out.print(and(x,y));
+        System.out.print(and(x,y));*/
     }
     public static boolean and(boolean a, boolean b){
-        boolean res = true;
+        /*boolean res = true;
         if ((a == true) & (b == true)){
             res = true;
         }
         else {
             res = false;
-        }
-        return (res);
+        }*/
+        return (a && b);
     }
 }

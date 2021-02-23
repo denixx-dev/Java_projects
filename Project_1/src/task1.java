@@ -10,6 +10,6 @@ public class task1 {
         System.out.print(minsecconv(f));//Вызов и вывод значения функции
     }
     public static float minsecconv(float a){
-        return a*60;
+        return 365*24*a;
     }
 }

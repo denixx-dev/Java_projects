@@ -10,10 +10,6 @@ public class task8 {
         System.out.println(profitableGamble(prob, prize, pay));
     }
     public static boolean profitableGamble(float a, int b, int c){
-        boolean res = false;
-        if (a*b > c){
-            res = true;
-        }
-        return (res);
+        return (a*b>c);
     }
 }
