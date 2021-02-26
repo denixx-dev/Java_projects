@@ -16,7 +16,7 @@ public class Palindrome {
            }
        }
        space++;
-       System.out.print(space);
+       //System.out.print(space);
        System.out.print(reverseString(text));
     }
     public static boolean reverseString(String x){

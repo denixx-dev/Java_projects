@@ -13,4 +13,8 @@ public class task1 {
     public static float minsecconv(float a){
         return a*60;
     }
+
+
 }
+
+
