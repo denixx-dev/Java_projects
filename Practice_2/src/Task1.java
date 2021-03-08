@@ -5,12 +5,25 @@ public class Task1 {
     Scanner scn = new Scanner(System.in);
     int a = scn.nextInt();
     int b = scn.nextInt();
-    /*for (int i=0;i<b;i++){
-        for (int j =0;j<2;j++){
+        int numCol1 =1;
+        int numCol2 = 2*b;
+        int res=0;
+        int[][] Arr = new int[b+1][3];
+        for (int i=1;i<=b;i++){
+            Arr[i][1]=numCol1;
+            numCol1 += 2;
+        }
+        for(int i =1;i<=b;i++){
+            Arr[i][2]= numCol2;
+            numCol2 -= 2;
+        }
+
+    for (int i=0;i<b+1;i++){
+        for (int j =0;j<3;j++){
             System.out.print(Arr[i][j]);
         }
         System.out.println("");
-    }*/
+    }
     System.out.print(oppositeHouse(a,b));
     }
 
