@@ -7,7 +7,7 @@ public class Task2 {
         String str = scn.nextLine();
         System.out.print(nameShuffle(str));
     }
-    private static String nameShuffle(String x){
+    public static String nameShuffle(String x){
         String[] dividedName = x.split(" ");
         String shuffledName = dividedName[1] + " " + dividedName[0];
         return (shuffledName);
