@@ -24,4 +24,11 @@ public class Task5 {
         }
         return(kol);
     }
+    public static int pub(){
+        return Task5.pri();
+
+    }
+    private static int pri(){
+        return 2;
+    }
 }
