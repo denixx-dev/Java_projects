@@ -1,23 +1,40 @@
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Lab2 {
     public static void main (String[] args) {
-        Point3D firstPoint = new Point3D(4,8,12);
-        Point3D secondPoint = new Point3D(2, 2 ,2);
+        Point3D firstPoint = new Point3D();
+        Point3D secondPoint = new Point3D();
         Point3D thirdPoint = new Point3D();
         //Point3D testPoint = new Point3D();
 
-        double xCoord1 = firstPoint.getX();
-        double yCoord1 = firstPoint.getY();
-        double zCoord1 = firstPoint.getZ();
+        System.out.println("Введите координаты первой точки: ");
+        Scanner scan = new Scanner((System.in));
 
-        double xCoord2 = secondPoint.getX();
-        double yCoord2 = secondPoint.getY();
-        double zCoord2 = secondPoint.getZ();
+        double xCoord1 = scan.nextDouble();
+        firstPoint.setX(xCoord1);
+        double yCoord1 = scan.nextDouble();
+        firstPoint.setY(yCoord1);
+        double zCoord1 = scan.nextDouble();
+        firstPoint.setZ(zCoord1);
 
-        double xCoord3 = thirdPoint.getX();
-        double yCoord3 = thirdPoint.getY();
-        double zCoord3 = thirdPoint.getZ();
+        System.out.println("Введите координаты второй точки: ");
+
+        double xCoord2 = scan.nextDouble();
+        secondPoint.setX(xCoord2);
+        double yCoord2 = scan.nextDouble();
+        secondPoint.setY(yCoord2);
+        double zCoord2 = scan.nextDouble();
+        secondPoint.setZ(zCoord2);
+
+        System.out.println("Введите координаты третьей точки: ");
+
+        double xCoord3 = scan.nextDouble();
+        thirdPoint.setX(xCoord3);
+        double yCoord3 = scan.nextDouble();
+        thirdPoint.setY(yCoord3);
+        double zCoord3 = scan.nextDouble();
+        thirdPoint.setZ(zCoord3);
 
         // Вывод метода рассчета расстояния между двумя точками
         System.out.print("Расстояние между точками: ");
@@ -26,13 +43,10 @@ public class Lab2 {
         // Вывод метода проверки равенства координат двух точек
         System.out.print("Равенство двух точек с координатами " + "(" + xCoord1 + " " + yCoord1 + " " + zCoord1
                 + ")" + " и " + "(" + xCoord3 + " " + yCoord3 + " " + zCoord3 + ")" + ": ");
-        //System.out.print(testPoint.equalCoords(xCoord1, xCoord2,
-        //       yCoord1, yCoord2, zCoord1, zCoord2));
         System.out.println(firstPoint.equalCoords(firstPoint, thirdPoint));
 
-
         // Проверка на равенство координат трех точек и вывод площади треугольника в случае, если точки не равны
-        if ((firstPoint.equalCoords(firstPoint,secondPoint)==true) | (firstPoint.equalCoords(secondPoint,thirdPoint)==true) | (firstPoint.equalCoords(firstPoint,thirdPoint)==true)){
+        if ((firstPoint.equalCoords(firstPoint,secondPoint)) | (firstPoint.equalCoords(secondPoint,thirdPoint)) | (firstPoint.equalCoords(firstPoint,thirdPoint))){
             System.out.print("Невозможно посчитать площадь по заданным точкам");
         }
         else{

@@ -39,12 +39,7 @@ public class Point3D {
     public void setZ(double val){
         this.zCoord = val;
     }
-
-    // Метод по сравнению координат
-    /*public boolean equalCoords(double x1, double x2, double y1, double y2, double z1, double z2){
-        return (x1==x2)&(y1==y2)&(z1==z2);
-    }*/
-
+    
     // Метод по сравнению координат через объекты
     public boolean equalCoords(Point3D point1, Point3D point2){
         return (point1.getX()== point2.getX())
