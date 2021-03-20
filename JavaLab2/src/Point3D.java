@@ -1,15 +1,11 @@
 import java.lang.Math;
 import java.text.DecimalFormat;
 
-public class Point3D {
-    private double xCoord;
-    private double yCoord;
+public class Point3D extends Point2D{
     private double zCoord;
 
     // Конструктор инициализации полей класса
     public Point3D(double x, double y, double z){
-        xCoord = x;
-        yCoord = y;
         zCoord = z;
     }
 
@@ -19,23 +15,11 @@ public class Point3D {
     }
 
     // Вывод каждой из координат
-    public double getX(){
-        return xCoord;
-    }
-    public double getY(){
-        return yCoord;
-    }
     public double getZ(){
         return zCoord;
     }
 
     // Изменения координат в main
-    public void setX(double val){
-        this.xCoord = val;
-    }
-    public void setY(double val){
-        this.yCoord = val;
-    }
     public void setZ(double val){
         this.zCoord = val;
     }
@@ -47,10 +31,10 @@ public class Point3D {
     }
 
     // Метод рассчета расстояния между точками через объекты
-    public String distanceTo(Point3D point1, Point3D point2){
+    public double distanceTo(Point3D point1, Point3D point2){
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String result = decimalFormat.format(Math.sqrt(Math.pow(point1.getX()-point2.getX(),2)
-                + Math.pow(point1.getY()- point2.getY(),2) + Math.pow(point1.getZ()- point2.getZ(),2)));
+        double result = Math.sqrt(Math.pow(point1.getX()-point2.getX(),2)
+                + Math.pow(point1.getY()- point2.getY(),2) + Math.pow(point1.getZ()- point2.getZ(),2));
         return result;
     }
 }

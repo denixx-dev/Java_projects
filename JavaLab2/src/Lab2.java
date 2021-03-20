@@ -38,7 +38,8 @@ public class Lab2 {
 
         // Вывод метода рассчета расстояния между двумя точками
         System.out.print("Расстояние между точками: ");
-        System.out.println(firstPoint.distanceTo(firstPoint, secondPoint));
+        System.out.printf("%.2f", firstPoint.distanceTo(firstPoint, secondPoint));
+        System.out.println("");
 
         // Вывод метода проверки равенства координат двух точек
         System.out.print("Равенство двух точек с координатами " + "(" + xCoord1 + " " + yCoord1 + " " + zCoord1
@@ -51,7 +52,7 @@ public class Lab2 {
         }
         else{
 
-            System.out.print("Площадь треугольника: " + computeArea(firstPoint, secondPoint, thirdPoint));
+            System.out.print("Площадь треугольника: " + computeArea1(firstPoint, secondPoint, thirdPoint));
         }
 
     }
@@ -69,5 +70,12 @@ public class Lab2 {
 
         return Math.sqrt(p*(p-a)*(p-b)*(p-c));
 
+    }
+    public static double computeArea1(Point3D firstPoint, Point3D secondPoint, Point3D thirdPoint){
+        double a = firstPoint.distanceTo(firstPoint, secondPoint);
+        double b = firstPoint.distanceTo(firstPoint, thirdPoint);
+        double c = firstPoint.distanceTo(secondPoint, thirdPoint);
+        double p = (a+b+c)/2;
+        return Math.sqrt(p*(p-a)*(p-b)*(p-c));
     }
 }
