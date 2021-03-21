@@ -38,13 +38,13 @@ public class Lab2 {
 
         // Вывод метода рассчета расстояния между двумя точками
         System.out.print("Расстояние между точками: ");
-        System.out.printf("%.2f", firstPoint.distanceTo(firstPoint, secondPoint));
+        System.out.printf("%.2f", firstPoint.distanceTo1(secondPoint));
         System.out.println("");
 
         // Вывод метода проверки равенства координат двух точек
         System.out.print("Равенство двух точек с координатами " + "(" + xCoord1 + " " + yCoord1 + " " + zCoord1
                 + ")" + " и " + "(" + xCoord3 + " " + yCoord3 + " " + zCoord3 + ")" + ": ");
-        System.out.println(firstPoint.equalCoords(firstPoint, thirdPoint));
+        System.out.println(firstPoint.equalCoords1(thirdPoint));
 
         // Проверка на равенство координат трех точек и вывод площади треугольника в случае, если точки не равны
         if ((firstPoint.equalCoords(firstPoint,secondPoint)) | (firstPoint.equalCoords(secondPoint,thirdPoint)) | (firstPoint.equalCoords(firstPoint,thirdPoint))){
@@ -72,9 +72,9 @@ public class Lab2 {
 
     }
     public static double computeArea1(Point3D firstPoint, Point3D secondPoint, Point3D thirdPoint){
-        double a = firstPoint.distanceTo(firstPoint, secondPoint);
-        double b = firstPoint.distanceTo(firstPoint, thirdPoint);
-        double c = firstPoint.distanceTo(secondPoint, thirdPoint);
+        double a = firstPoint.distanceTo1(secondPoint);
+        double b = firstPoint.distanceTo1(thirdPoint);
+        double c = secondPoint.distanceTo1(thirdPoint);
         double p = (a+b+c)/2;
         return Math.sqrt(p*(p-a)*(p-b)*(p-c));
     }
