@@ -47,7 +47,7 @@ public class Lab2 {
         System.out.println(firstPoint.equalCoords1(thirdPoint));
 
         // Проверка на равенство координат трех точек и вывод площади треугольника в случае, если точки не равны
-        if ((firstPoint.equalCoords(firstPoint,secondPoint)) | (firstPoint.equalCoords(secondPoint,thirdPoint)) | (firstPoint.equalCoords(firstPoint,thirdPoint))){
+        if ((firstPoint.equalCoords1(secondPoint)) | (firstPoint.equalCoords1(thirdPoint)) | (secondPoint.equalCoords1(thirdPoint))){
             System.out.print("Невозможно посчитать площадь по заданным точкам");
         }
         else{
