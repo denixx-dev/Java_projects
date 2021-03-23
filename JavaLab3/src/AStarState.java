@@ -1,3 +1,7 @@
+import com.intellij.vcs.log.Hash;
+
+import java.util.HashMap;
+
 /**
  * This class stores the basic state necessary for the A* algorithm to compute a
  * path across a map.  This state includes a collection of "open waypoints" and
@@ -35,7 +39,7 @@ public class AStarState
      **/
     public Waypoint getMinOpenWaypoint()
     {
-        // TODO:  Implement.
+
         return null;
     }
 
@@ -58,8 +62,7 @@ public class AStarState
     /** Returns the current number of open waypoints. **/
     public int numOpenWaypoints()
     {
-        // TODO:  Implement.
-        return 0;
+        return this.openHeights.size();
     }
 
 
@@ -81,5 +84,16 @@ public class AStarState
         // TODO:  Implement.
         return false;
     }
+
+    /**
+     * Поля для открытых (доступных для отрисовки маршрута)
+     * и закрытых (пройденных) вершин соответственно
+     */
+    private HashMap<Location,Waypoint> openHeights = new HashMap<>();
+
+    private HashMap<Location,Waypoint> closedHeights = new HashMap<>();
+
+
+
 }
 
