@@ -39,8 +39,16 @@ public class AStarState
      **/
     public Waypoint getMinOpenWaypoint()
     {
-
-        return null;
+        if (this.numOpenWaypoints() == 0){ return null;}
+        /**
+         * Инициализация поля minWP для определения вершины с минимальной общей стоимостью
+         */
+        //Waypoint minWP = this.openHeights.get(0);
+        this.openHeights.forEach((k,v)->{
+            System.out.println(k);
+            System.out.println(v);
+        });
+        return  null;
     }
 
     /**
