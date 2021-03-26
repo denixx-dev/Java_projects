@@ -1,37 +1,29 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Task1 {
     public static void main (String[] args){
-        String[] townAndPopulation = new String[]{"Nepal", "572"};
-        System.out.print(millionsRounding(townAndPopulation));
+        HashMap<String, Integer> townAndPopulation = new HashMap<>();
+        townAndPopulation.put("Nice", 942208);
+        townAndPopulation.put("Abu Dhabi", 1482816);
+        townAndPopulation.put("Naples", 2186853);
+
+
+        System.out.println(millionsRounding(townAndPopulation));
     }
-    public static String millionsRounding(String[] townsAndPopulation){
-        //String town = townsAndPopulation[0];
-        String pop = townsAndPopulation[1];
-        /**
-         * Представление строки в виде числа
-         */
-        int population = Integer.parseInt(townsAndPopulation[1]);
-        //int length = townsAndPopulation[1].length();
-        int div = (int)(population / Math.pow(10,6));
-        int res=0;
-        /**
-         * Проверка на то, является ли число меньшим, чем миллион
-         */
-        if (div == 0){
-            double diff = Math.pow(10,6)*(div+1)-population;
-            if (diff <= 500000){
-                res = (int)Math.pow(10,6)*(div+1);
-            }
-        }
-        else{
-            double diff = population-Math.pow(10,6)*div;
-            if(diff <= 500000){
-                res = (int)Math.pow(10,6)*div;
-            }
-        }
-        pop = Integer.toString(res);
-        return townsAndPopulation[0]+' '+pop;
+    public static HashMap<String, Integer> millionsRounding(HashMap<String, Integer> a){
+        int pop1 = a.get("Nice");
+        int pop2 = a.get("Abu Dhabi");
+        int pop3 = a.get("Naples");
+
+        int res1 = (int)(Math.round((pop1 / 1E6))*1E6);
+        a.put("Nice", res1);
+        int res2 = (int)(Math.round((pop2 / 1E6))*1E6);
+        a.put("Abu Dhabi", res2);
+        int res3 = (int)(Math.round((pop3 / 1E6))*1E6);
+        a.put("Naples", res3);
+
+        return a;
 
     }
 }
