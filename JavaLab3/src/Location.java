@@ -32,6 +32,7 @@ public class Location {
 
     @Override
     public int hashCode() {
-        return Objects.hash(xCoord, yCoord);
+        // 32-битный hashcode
+        return 31 * Integer.hashCode(xCoord) + Integer.hashCode(yCoord);
     }
 }

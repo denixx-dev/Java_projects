@@ -19,15 +19,10 @@ public class Task1 {
         int res=0;
         if (x%2==0){
             rowNum = (2*b - x)/2 + 1;
-        }
-        else{
-            rowNum = (1 + x)/2;
-        }
-
-        if (x%2==0){
             res = (2*b-1)-(b - rowNum)*2;
         }
         else{
+            rowNum = (1 + x)/2;
             res = (b - rowNum)*2+2;
         }
 

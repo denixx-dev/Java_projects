@@ -152,4 +152,9 @@ public class Map2D
 
         finish = loc;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

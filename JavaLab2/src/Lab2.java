@@ -58,7 +58,7 @@ public class Lab2 {
     }
 
     // Метод рассчета площади треугольника, образованного тремя точками
-    public static double computeArea (Point3D firsPoint, Point3D secondPoint, Point3D thirdPoint){
+    /*public static double computeArea (Point3D firsPoint, Point3D secondPoint, Point3D thirdPoint){
         double a = Math.sqrt(Math.pow(firsPoint.getX()-secondPoint.getX(),2)
                 + Math.pow(firsPoint.getY()-secondPoint.getY(),2) + Math.pow(firsPoint.getZ()- secondPoint.getZ(),2));
         double b = Math.sqrt(Math.pow(secondPoint.getX()- thirdPoint.getX(),2)
@@ -69,8 +69,8 @@ public class Lab2 {
         double p = (a+b+c)/2;
 
         return Math.sqrt(p*(p-a)*(p-b)*(p-c));
+    }*/
 
-    }
     public static double computeArea1(Point3D firstPoint, Point3D secondPoint, Point3D thirdPoint){
         double a = firstPoint.distanceTo1(secondPoint);
         double b = firstPoint.distanceTo1(thirdPoint);

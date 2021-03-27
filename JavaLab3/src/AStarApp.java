@@ -10,19 +10,22 @@ import javax.swing.*;
  * path from start to end using the A* pathfinding algorithm.  If a path is
  * found, it is displayed in green.
  **/
+
+
+
 public class AStarApp {
 
     /** The number of grid cells in the X direction. **/
-    private int width;
+    private final int width;
 
     /** The number of grid cells in the Y direction. **/
-    private int height;
+    private final int height;
 
     /** The location where the path starts from. **/
-    private Location startLoc;
+    private final Location startLoc;
 
     /** The location where the path is supposed to finish. **/
-    private Location finishLoc;
+    private final Location finishLoc;
 
     /**
      * This is a 2D array of UI components that provide display and manipulation
@@ -183,11 +186,11 @@ public class AStarApp {
     /** Kicks off the application.  Called from the {@link #main} method. **/
     private void start()
     {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() { initGUI(); }
-        });
+        SwingUtilities.invokeLater(this::initGUI);
     }
 
+
+    static int a = 0;
 
     /**
      * This helper method attempts to compute a path using the current map

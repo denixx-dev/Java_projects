@@ -10,25 +10,12 @@ public class Task5 {
     }
     public static int equal(int a, int b, int c){
         int kol=0;
-        if (a==b){
-            kol=2;
-        }
-        if(b==c){
-            kol=2;
-        }
-        if(a==c){
+        if ((a==b)|(b==c)|(a==c)){
             kol=2;
         }
         if((a==b)&(a==c)&(b==c)){
             kol++;
         }
         return(kol);
-    }
-    public static int pub(){
-        return Task5.pri();
-
-    }
-    private static int pri(){
-        return 2;
     }
 }
