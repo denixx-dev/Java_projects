@@ -22,6 +22,9 @@ public class Location {
         this(0, 0);
     }
 
+    /**
+     * Переопределение метода equals
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -30,6 +33,9 @@ public class Location {
         return xCoord == location.xCoord && yCoord == location.yCoord;
     }
 
+    /**
+     *Переопределение метода hashCode
+     */
     @Override
     public int hashCode() {
         // 32-битный hashcode

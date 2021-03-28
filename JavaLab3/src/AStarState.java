@@ -1,4 +1,9 @@
+
 import java.util.Comparator;
+
+import com.intellij.vcs.log.Hash;
+
+
 import java.util.HashMap;
 
 /**
@@ -40,6 +45,18 @@ public class AStarState {
     public Waypoint getMinOpenWaypoint() {
         // Сравнение значений открытых вершин, используя встроеннный метод min java stream API
         return openWaypoints.values().stream().min(Comparator.comparing(Waypoint::getTotalCost)).orElseThrow();
+    public Waypoint getMinOpenWaypoint()
+    {
+        if (this.numOpenWaypoints() == 0){ return null;}
+        /**
+         * Инициализация поля minWP для определения вершины с минимальной общей стоимостью
+         */
+        //Waypoint minWP = this.openHeights.get(0);
+        this.openHeights.forEach((k,v)->{
+            System.out.println(k);
+            System.out.println(v);
+        });
+        return  null;
     }
 
     /**
@@ -70,6 +87,10 @@ public class AStarState {
      **/
     public int numOpenWaypoints() {
         return openWaypoints.size();
+    /** Returns the current number of open waypoints. **/
+    public int numOpenWaypoints()
+    {
+        return this.openHeights.size();
     }
 
     /**
@@ -95,5 +116,15 @@ public class AStarState {
     private final HashMap<Location, Waypoint> openWaypoints = new HashMap<>();
 
     private final HashMap<Location, Waypoint> closedWaypoints = new HashMap<>();
+    /**
+     * Поля для открытых (доступных для отрисовки маршрута)
+     * и закрытых (пройденных) вершин соответственно
+     */
+    private HashMap<Location,Waypoint> openHeights = new HashMap<>();
+
+    private HashMap<Location,Waypoint> closedHeights = new HashMap<>();
+
+
+
 }
 
