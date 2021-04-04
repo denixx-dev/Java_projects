@@ -1,5 +1,5 @@
-import com.intellij.vcs.log.Hash;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
@@ -9,26 +9,27 @@ import java.util.HashMap;
  * the basic operations that the A* pathfinding algorithm needs to perform its
  * processing.
  **/
-public class AStarState
-{
-    /** This is a reference to the map that the A* algorithm is navigating. **/
-    private Map2D map;
 
+
+public class AStarState {
+    /**
+     * This is a reference to the map that the A* algorithm is navigating.
+     **/
+    private final Map2D map;
 
     /**
      * Initialize a new state object for the A* pathfinding algorithm to use.
      **/
-    public AStarState(Map2D map)
-    {
+    public AStarState(Map2D map) {
         if (map == null)
             throw new NullPointerException("map cannot be null");
-
         this.map = map;
     }
 
-    /** Returns the map that the A* pathfinder is navigating. **/
-    public Map2D getMap()
-    {
+    /**
+     * Returns the map that the A* pathfinder is navigating.
+     **/
+    public Map2D getMap() {
         return map;
     }
 
@@ -37,18 +38,9 @@ public class AStarState
      * with the minimum total cost.  If there are no open waypoints, this method
      * returns <code>null</code>.
      **/
-    public Waypoint getMinOpenWaypoint()
-    {
-        if (this.numOpenWaypoints() == 0){ return null;}
-        /**
-         * Инициализация поля minWP для определения вершины с минимальной общей стоимостью
-         */
-        //Waypoint minWP = this.openHeights.get(0);
-        this.openHeights.forEach((k,v)->{
-            System.out.println(k);
-            System.out.println(v);
-        });
-        return null;
+    public Waypoint getMinOpenWaypoint() {
+        // Сравнение значений открытых вершин, используя встроеннный метод min java stream API
+        return openWaypoints.values().stream().min(Comparator.comparing(Waypoint::getTotalCost)).orElseThrow();
     }
 
     /**
@@ -60,48 +52,48 @@ public class AStarState
      * if</em> the new waypoint's "previous cost" value is less than the current
      * waypoint's "previous cost" value.
      **/
-    public boolean addOpenWaypoint(Waypoint newWP)
-    {
+    public void addOpenWaypoint(Waypoint newWP) {
         // TODO:  Implement.
-        return false;
+        // Добавляем новую точку, если не окажется ключа открытой точки
+        if (!openWaypoints.containsKey(newWP.loc))
+            openWaypoints.put(newWP.loc, newWP);
+            // Иначе сравниваем стоимости ключей текущей точки с предыдущей
+            // и заполняем текущую открытую вершину ключем
+            // и значением точки с меньшей стоимостью пути
+
+        else if (newWP.getPreviousCost() < openWaypoints.get(newWP.loc).getPreviousCost())
+            openWaypoints.put(newWP.loc, newWP);
     }
 
 
-    /** Returns the current number of open waypoints. **/
-    public int numOpenWaypoints()
-    {
-        return this.openHeights.size();
+    /**
+     * Returns the current number of open waypoints.
+     **/
+    public int numOpenWaypoints() {
+        return openWaypoints.size();
     }
-
 
     /**
      * This method moves the waypoint at the specified location from the
      * open list to the closed list.
      **/
-    public void closeWaypoint(Location loc)
-    {
-        // TODO:  Implement.
+    public void closeWaypoint(Location loc) {
+        // Кладем точку, которую мы прошли в hashmap закрытых вершин и удаляем из hashmap открытых вершин
+        if (openWaypoints.containsKey(loc)) {
+            closedWaypoints.put(loc, openWaypoints.get(loc));
+            openWaypoints.remove(loc);
+        }
     }
 
     /**
      * Returns true if the collection of closed waypoints contains a waypoint
      * for the specified location.
      **/
-    public boolean isLocationClosed(Location loc)
-    {
-        // TODO:  Implement.
-        return false;
+    public boolean isLocationClosed(Location loc) {
+        return closedWaypoints.containsKey(loc);
     }
 
-    /**
-     * Поля для открытых (доступных для отрисовки маршрута)
-     * и закрытых (пройденных) вершин соответственно
-     */
-    private HashMap<Location,Waypoint> openHeights = new HashMap<>();
+    private final HashMap<Location, Waypoint> openWaypoints = new HashMap<>();
 
-    private HashMap<Location,Waypoint> closedHeights = new HashMap<>();
-
-
-
+    private final HashMap<Location, Waypoint> closedWaypoints = new HashMap<>();
 }
-

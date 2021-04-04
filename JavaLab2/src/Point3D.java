@@ -35,12 +35,12 @@ public class Point3D extends Point2D{
     }
 
     // Метод рассчета расстояния между точками через объекты
-    public double distanceTo(Point3D point1, Point3D point2){
+    /*public double distanceTo(Point3D point1, Point3D point2){
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         double result = Math.sqrt(Math.pow(point1.getX()-point2.getX(),2)
                 + Math.pow(point1.getY()- point2.getY(),2) + Math.pow(point1.getZ()- point2.getZ(),2));
         return result;
-    }
+    }*/
 
     public double distanceTo1(Point3D point){
         return Math.sqrt(Math.pow(this.getX()-point.getX(),2)
