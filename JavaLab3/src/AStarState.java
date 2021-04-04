@@ -48,7 +48,7 @@ public class AStarState
             System.out.println(k);
             System.out.println(v);
         });
-        return  null;
+        return null;
     }
 
     /**

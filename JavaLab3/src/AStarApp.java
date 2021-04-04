@@ -240,5 +240,6 @@ public class AStarApp {
     public static void main(String[] args) {
         AStarApp app = new AStarApp(40, 30);
         app.start();
+
     }
 }
