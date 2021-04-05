@@ -50,7 +50,16 @@ public class Task3 {
                 res = "TIE";
                 break sixth;
             }
-
         return res;
+        /*final int scissors1 = 1;
+        final int paper1 = 1<<1;
+        final int rock1 = 1<<2;
+        final int scissors2 = 1<<3;
+        final int paper2 = 1<<4;
+        final int rock2 = 1<<5;
+
+        final int tie = 0;
+        final int win1 = 1;
+        final int win2 =2;*/
     }
 }

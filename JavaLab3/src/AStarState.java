@@ -57,10 +57,9 @@ public class AStarState {
         // Добавляем новую точку, если не окажется ключа открытой точки
         if (!openWaypoints.containsKey(newWP.loc))
             openWaypoints.put(newWP.loc, newWP);
-            // Иначе сравниваем стоимости ключей текущей точки с предыдущей
+        // Иначе сравниваем стоимости ключей текущей точки с предыдущей
             // и заполняем текущую открытую вершину ключем
             // и значением точки с меньшей стоимостью пути
-
         else if (newWP.getPreviousCost() < openWaypoints.get(newWP.loc).getPreviousCost())
             openWaypoints.put(newWP.loc, newWP);
     }
