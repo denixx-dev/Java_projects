@@ -20,6 +20,10 @@ public class JImageDisplay extends JComponent {
         jFrame.setSize(400, 400);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
+        JButton jButton = new JButton();
+        BorderLayout borderLayout = new BorderLayout();
+
+
     }
 
     public void clearImage() {
@@ -39,7 +43,7 @@ public class JImageDisplay extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.blue);
+        //g.setColor(Color.blue);
         //g.fill3DRect(10, 10, 100, 200,true);
         g.drawImage(img,0,0,img.getWidth(),img.getHeight(),null);
     }
