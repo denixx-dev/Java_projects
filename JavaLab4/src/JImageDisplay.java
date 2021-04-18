@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 public class JImageDisplay extends JComponent {
     private final BufferedImage img;
 
+    public BufferedImage getImage(){
+        return img;
+    }
+
     //Конструктор для управления изображением, содержимое которого нужно записать
     public JImageDisplay(int w, int h) {
         img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -15,16 +19,14 @@ public class JImageDisplay extends JComponent {
     }
 
     //Метод для вызова графического интерфейса
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         JFrame jFrame = new JFrame();
         jFrame.setSize(400, 400);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
         JButton jButton = new JButton();
         BorderLayout borderLayout = new BorderLayout();
-
-
-    }
+    }*/
 
     public void clearImage() {
         int[] blankArray = new int[getHeight()*getWidth()];

@@ -5,7 +5,7 @@ import java.awt.geom.Rectangle2D;
  * This class provides the common interface and operations for fractal
  * generators that can be viewed in the Fractal Explorer.
  */
-public class FractalGenerator {
+public abstract class FractalGenerator {
 
     /**
      * This static helper function takes an integer coordinate and converts it
@@ -47,18 +47,13 @@ public class FractalGenerator {
         range.width = newWidth;
         range.height = newHeight;
     }
-    public class Mandelbrot {
+
         /**
          * Sets the specified rectangle to contain the initial range suitable for
          * the fractal being generated.
          */
-        public void getInitialRange(Rectangle2D.Double range) {
-            range.x =-2;
-            range.y = -1.5;
-            range.width = 3;
-            range.height= 3;
+        public abstract void getInitialRange(Rectangle2D.Double range);
 
-        }
 
         /**
          * Given a coordinate <em>x</em> + <em>iy</em> in the complex plane,
@@ -67,16 +62,10 @@ public class FractalGenerator {
          * doesn't escape before the iteration limit is reached is indicated
          * with a result of -1.
          */
-        public static final int MAX_ITERATIONS = 2000;
+        public abstract int numIterations(double x, double y);
 
-        public int numIterations(double x, double y){
-            int i =0;
-            while ((x*x+y*y < 4) && (i < MAX_ITERATIONS)){
 
-            }
-            return 0;
-        }
 
 
     }
-}
+
