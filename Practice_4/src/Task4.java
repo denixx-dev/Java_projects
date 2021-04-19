@@ -5,7 +5,8 @@ public class Task4 {
     public static String noYelling(String str) {
         int i = str.length()-1;
         int index;
-        while ((str.charAt(i) == '?' | str.charAt(i) == '!') & (str.charAt(i-1)=='!' | str.charAt(i-1)=='?')) {
+        while ((str.charAt(i) == '?' || str.charAt(i) == '!')
+                && (str.charAt(i-1)=='!' || str.charAt(i-1)=='?')) {
             i--;
         }
         i++;

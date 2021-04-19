@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 public class JImageDisplay extends JComponent {
     private final BufferedImage img;
 
+
     //Конструктор для управления изображением, содержимое которого нужно записать
     public JImageDisplay(int w, int h) {
         img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
