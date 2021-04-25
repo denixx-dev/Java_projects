@@ -1,7 +1,12 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Path;
+import javax.imageio.ImageIO;
 
 public class FractalExplorer {
     private final int displaySize;
@@ -35,11 +40,13 @@ public class FractalExplorer {
         JFrame frame = new JFrame("Fractal Generator");
         JButton button = new JButton("Reset");
         JComboBox comboBox = new JComboBox();
-        JPanel panel = new JPanel();
+        JPanel upperPanel = new JPanel();
         comboBox.addItem(mandelbrot);
         comboBox.addItem(tricorn);
         comboBox.addItem(burning_ship);
         JLabel label = new JLabel();
+        JButton saveBtn = new JButton("Save");
+        JPanel lowerPanel = new JPanel();
 
         imageDisplay = new JImageDisplay(displaySize, displaySize);
         imageDisplay.addMouseListener(new MouseListener());
@@ -48,18 +55,21 @@ public class FractalExplorer {
         button.addActionListener(new ActionHandler());
 
 
-/*        *//** Instance of the MouseHandler on the fractal-display component. **//*
+        /** Instance of the MouseHandler on the fractal-display component. **/
         MouseListener click = new MouseListener();
-        imageDisplay.addMouseListener(click);*/
+        imageDisplay.addMouseListener(click);
 
         //Размещение объектов интерфейса
         frame.setLayout(new java.awt.BorderLayout());
         frame.add(imageDisplay, BorderLayout.CENTER);//Создание окна
-        frame.add(button, BorderLayout.SOUTH);//Добавление кнопки сброса
-        label.setText("Fractal:");
-        panel.add(label, BorderLayout.NORTH);//Добавление лейбла на панель
-        panel.add(comboBox, BorderLayout.NORTH);//Добавление комбобокса на панель
-        frame.add(panel,BorderLayout.NORTH);//Добавление самой панели
+        frame.add(upperPanel, BorderLayout.SOUTH);//Добавление верхней панели
+        frame.add(lowerPanel, BorderLayout.SOUTH);//Добавление нижней панели
+        label.setText("Fractal:");//Настройка текста лейбла
+        upperPanel.add(label, BorderLayout.NORTH);//Добавление лейбла на панель
+        upperPanel.add(comboBox, BorderLayout.NORTH);//Добавление комбобокса на верхнюю панель
+        lowerPanel.add(saveBtn, BorderLayout.SOUTH);//Добавление кнопки сохранения на нижнюю панель
+        lowerPanel.add(button, BorderLayout.SOUTH);//Добавление кнопки сброса на нижнюю панель
+        frame.add(upperPanel,BorderLayout.NORTH);//Добавление самой панели
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +77,14 @@ public class FractalExplorer {
         //Добавление обработчика нажатия на комбобокс
         ActionHandler fractalChooser = new ActionHandler();
         comboBox.addActionListener(fractalChooser);
+
+        //Добаление обработчика нажатия на кнопку Reset
+        ActionHandler resetBtnAH = new ActionHandler();
+        button.addActionListener(resetBtnAH);
+
+        //Добавление обработчика нажатия на кнопку Save
+        ActionHandler saveBtnAH = new ActionHandler();
+        saveBtn.addActionListener(saveBtnAH);
 
         frame.pack();
         frame.setVisible(true);
@@ -96,7 +114,7 @@ public class FractalExplorer {
         @Override
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
-            if (command == "Reset") {
+            if (command.equals("Reset")) {
                 fractalGenerator.getInitialRange(range);
                 drawFractal();
             }
@@ -105,6 +123,25 @@ public class FractalExplorer {
                 fractalGenerator = (FractalGenerator) source.getSelectedItem();
                 fractalGenerator.getInitialRange(range);
                 drawFractal();
+            }
+            else if (command.equals("Save")) {
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("PNG Images", "png");
+                fileChooser.setFileFilter(extensionFilter);
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                int userSelection = fileChooser.showSaveDialog(imageDisplay);
+                if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    //String fileName = file.toString();
+                    try {
+                        BufferedImage bufferedImage = imageDisplay.getImage();
+                        javax.imageio.ImageIO.write(bufferedImage, "png", file);
+                    }
+                    catch (Exception exc) {
+                        JOptionPane.showMessageDialog(imageDisplay, exc.getMessage(), "Cannot save image", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else return;
             }
         }
 
