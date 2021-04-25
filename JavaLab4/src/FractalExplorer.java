@@ -1,109 +1,80 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.*;
+import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 
 public class FractalExplorer {
-    //Размер экрана
     private int displaySize;
-
-    //Ссылка для обновления отображения
-    private JImageDisplay display;
-
-    //Объект для создания разных видов фракталов
+    private JImageDisplay imageDisplay;
     private FractalGenerator fractalGenerator;
-
-    //Диапазон поля для просмотра
     private Rectangle2D.Double range;
 
-    //Конструктор, принимающий значения размера и создающий объекты диапазона и фрактального генератора
-    public FractalExplorer(int size) {
-        displaySize = size;
-        range = new Rectangle2D.Double();
-        fractalGenerator = new Mandelbrot();
-        fractalGenerator.getInitialRange(range);
-        display = new JImageDisplay(size, size);
+    private FractalExplorer (int displaySize) {
+        this.displaySize = displaySize;
+        this.fractalGenerator = new Mandelbrot();
+        this.range = new Rectangle2D.Double(0,0,0,0);
+        fractalGenerator.getInitialRange(this.range);
     }
 
-    //Метод по отображению графического интерфейса
-    public void createAndShowGUI() {
-        JFrame jFrame = new JFrame("Fractal Explorer");
-        jFrame.add(display, BorderLayout.CENTER);
-
-        JPanel jPanel =new JPanel();
-        jFrame.add(jPanel, BorderLayout.SOUTH);
-
-        JButton resetBtn = new JButton("Reset");
-        jPanel.add(resetBtn);
-
-        //jFrame.add(resetBtn,BorderLayout.SOUTH);
-
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        jFrame.pack();
-        jFrame.setVisible(true);
-        jFrame.setResizable(false);
+    public static void main(String[] args) {
+        FractalExplorer fractalExplorer = new FractalExplorer(600);
+        fractalExplorer.setGUI();
+        fractalExplorer.drawFractal();
     }
 
+    // задание интерфейса
+    public void setGUI() {
+        JFrame frame = new JFrame("Fractal Generator");
+        JButton button = new JButton("Reset");
+
+        imageDisplay = new JImageDisplay(displaySize, displaySize);
+        imageDisplay.addMouseListener(new MouseListener());
+
+        button.addActionListener(new ActionHandler());
+
+        frame.setLayout(new java.awt.BorderLayout());
+        frame.add(imageDisplay, BorderLayout.CENTER);
+        frame.add(button, BorderLayout.SOUTH);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setResizable(false);
+    }
+
+    // отрисовка фрактала в JImageDisplay
     private void drawFractal() {
-        for (int x =0; x < displaySize; x++) {
-            for (int y=0; y<displaySize; y++) {
-                double xCoord = fractalGenerator.getCoord(range.x, range.x+range.width, displaySize, x);
-                double yCoord = fractalGenerator.getCoord(range.y, range.y+range.height, displaySize, y);
-
-                int locIterations = fractalGenerator.numIterations(xCoord, yCoord);
-
-                if (locIterations == -1)
-                    display.drawPixel(x,y,0);
+        for (int x = 0; x < displaySize; x++) {
+            for (int y = 0; y < displaySize; y++) {
+                int counter = fractalGenerator.numIterations(FractalGenerator.getCoord(range.x, range.x + range.width, displaySize, x),
+                        fractalGenerator.getCoord(range.y, range.y + range.width, displaySize, y));
+                if (counter == -1) {
+                    imageDisplay.drawPixel(x, y, 0);
+                }
                 else {
-                    float hue = 0.7f + (float)locIterations/200f;
+                    float hue = 0.7f + (float) counter / 200f;
                     int rgbColor = Color.HSBtoRGB(hue, 1f, 1f);
-                    display.drawPixel(x,y,rgbColor);
+                    imageDisplay.drawPixel(x, y, rgbColor);
                 }
             }
         }
-        display.repaint();
+        imageDisplay.repaint();
     }
 
-    private class ButtonHandler implements ActionListener {
+    public class ActionHandler implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
-            String command = e.getActionCommand();
-            //Обработка нажатия на кнопку сброса
-            if (command.equals("Reset")) {
-                fractalGenerator.getInitialRange(range);
-                drawFractal();
-            }
+            fractalGenerator.getInitialRange(range);
+            drawFractal();
         }
     }
 
-    private class MouseHandler extends MouseAdapter {
+    public class MouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            int x = e.getX();
-            double xCoord = fractalGenerator.getCoord(range.x, range.x+range.width, displaySize,x);
-
-            int y = e.getY();
-            double yCoord = fractalGenerator.getCoord(range.y, range.y+range.height, displaySize, y);
-
-            fractalGenerator.recenterAndZoomRange(range, xCoord, yCoord, 0.5);
-
+            double x = FractalGenerator.getCoord(range.x, range.x + range.width, displaySize, e.getX());
+            double y = FractalGenerator.getCoord(range.y, range.y + range.width, displaySize, e.getY());
+            fractalGenerator.recenterAndZoomRange(range, x, y, 0.5);
             drawFractal();
-
         }
     }
-
-    public static void main(String[] args)
-    {
-        FractalExplorer displayExplorer = new FractalExplorer(800);
-        displayExplorer.createAndShowGUI();
-        displayExplorer.drawFractal();
-    }
-
-
-
-
-
 }

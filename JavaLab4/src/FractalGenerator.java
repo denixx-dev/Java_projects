@@ -29,7 +29,7 @@ public abstract class FractalGenerator {
         assert coord >= 0 && coord < size;
 
         double range = rangeMax - rangeMin;
-        return rangeMin + (range * (double) coord / (double) size);
+        return rangeMin + (range * (double)coord / (double)size);
     }
 
     /**
@@ -54,7 +54,6 @@ public abstract class FractalGenerator {
          */
         public abstract void getInitialRange(Rectangle2D.Double range);
 
-
         /**
          * Given a coordinate <em>x</em> + <em>iy</em> in the complex plane,
          * computes and returns the number of iterations before the fractal
@@ -63,9 +62,5 @@ public abstract class FractalGenerator {
          * with a result of -1.
          */
         public abstract int numIterations(double x, double y);
-
-
-
-
     }
 
