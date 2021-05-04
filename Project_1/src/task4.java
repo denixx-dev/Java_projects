@@ -8,14 +8,14 @@ public class task4 {
         System.out.print(divisibleByFive(a));
     }
     public static boolean divisibleByFive(int a){
-       // boolean flag;
-        /*if (a % 5 > 0){
+        boolean flag;
+        if (a % 5 > 0){
             flag = false;
         }
         else{
             flag = true;
-        }*/
+        }
 
-        return (a % 5 == 0);
+        return (flag);
     }
 }

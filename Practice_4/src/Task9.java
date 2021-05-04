@@ -28,7 +28,6 @@ public class Task9 {
         //int newY = Integer.parseInt(strY);
         int res;
 
-
         String buffStr="";
        for (int i=0; i<lenX; i++) {
             buffStr += Integer.toString(Character.digit(strX.charAt(i),10)
