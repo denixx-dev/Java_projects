@@ -14,6 +14,10 @@ public class FractalExplorer {
     private JImageDisplay imageDisplay;
     private FractalGenerator fractalGenerator;
     private Rectangle2D.Double range;
+    private int rowsAreLeft;
+    private JButton button = new JButton("Reset");
+    private JButton saveBtn = new JButton("Save");
+    private JComboBox comboBox = new JComboBox();
 
     private FractalExplorer (int size) {
         displaySize = size;
@@ -39,14 +43,14 @@ public class FractalExplorer {
         FractalGenerator burning_ship = new Burning_ship();
         //Инициализация объектов интерфейса
         JFrame frame = new JFrame("Fractal Generator");
-        JButton button = new JButton("Reset");
-        JComboBox comboBox = new JComboBox();
+
+
         JPanel upperPanel = new JPanel();
         comboBox.addItem(mandelbrot);
         comboBox.addItem(tricorn);
         comboBox.addItem(burning_ship);
         JLabel label = new JLabel();
-        JButton saveBtn = new JButton("Save");
+
         JPanel lowerPanel = new JPanel();
 
         imageDisplay = new JImageDisplay(displaySize, displaySize);
@@ -94,21 +98,19 @@ public class FractalExplorer {
 
     // отрисовка фрактала в JImageDisplay
     private void drawFractal() {
-        for (int x = 0; x < displaySize; x++) {
-            for (int y = 0; y < displaySize; y++) {
-                int counter = fractalGenerator.numIterations(FractalGenerator.getCoord(range.x, range.x + range.width, displaySize, x),
-                        fractalGenerator.getCoord(range.y, range.y + range.width, displaySize, y));
-                if (counter == -1) {
-                    imageDisplay.drawPixel(x, y, 0);
-                }
-                else {
-                    float hue = 0.7f + (float) counter / 200f;
-                    int rgbColor = Color.HSBtoRGB(hue, 1f, 1f);
-                    imageDisplay.drawPixel(x, y, rgbColor);
-                }
-            }
+        enableUI(false);
+        rowsAreLeft = displaySize;
+        for (int i=0; i<displaySize; i++) {
+            FractalWorker fractalWorker = new FractalWorker(i);
+            fractalWorker.execute();
         }
-        imageDisplay.repaint();
+
+    }
+
+    private void enableUI(boolean bool) {
+        saveBtn.setEnabled(bool);
+        button.setEnabled(bool);
+        comboBox.setEnabled(bool);
     }
 
     private class ActionHandler implements ActionListener {
@@ -165,6 +167,7 @@ public class FractalExplorer {
         //private int Y;
         private final int yCoord;
         private final ArrayList<Integer> computedRGB = new ArrayList<>();
+        //private int[] computedRGB = new int[displaySize];
 
         private FractalWorker(int Y) {
             this.yCoord = Y;
@@ -174,24 +177,31 @@ public class FractalExplorer {
         protected Object doInBackground() throws Exception {
             int rgbColor;
             for (int x = 0; x < displaySize; x++) {
-                for (int y = 0; y < displaySize; y++) {
                     int counter = fractalGenerator.numIterations(FractalGenerator.getCoord(range.x, range.x + range.width, displaySize, x),
-                            fractalGenerator.getCoord(range.y, range.y + range.width, displaySize, y));
+                            fractalGenerator.getCoord(range.y, range.y + range.width, displaySize, yCoord));
                     if (counter == -1) {
-                        //imageDisplay.drawPixel(x, y, 0);
-                        float hue = 0.7f + (float) counter / 200f;
-                        rgbColor = Color.HSBtoRGB(hue,1f,1f);
-                        computedRGB.add(rgbColor);
+                        computedRGB.add(0);
+                        //computedRGB[x] =0;
                     }
                     else {
                         float hue = 0.7f + (float) counter / 200f;
                         rgbColor = Color.HSBtoRGB(hue, 1f, 1f);
-                        //imageDisplay.drawPixel(x, y, rgbColor);
                         computedRGB.add(rgbColor);
+                        //computedRGB[x]=rgbColor;
                     }
                 }
-            }
             return null;
+        }
+        @Override
+        protected void done(){
+            for (int i=0; i<displaySize; i++) {
+                imageDisplay.drawPixel(i, yCoord, computedRGB.get(i));
+            }
+            imageDisplay.repaint(0,0,yCoord,displaySize,1);
+            rowsAreLeft--;
+            if (rowsAreLeft ==0) {
+                enableUI(true);
+            }
         }
     }
 }
