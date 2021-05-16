@@ -3,6 +3,7 @@ import java.util.*;
 public class Task8 {
     public static void main (String[] args) {
          System.out.print(commonLastVowel("OOI UUI EEI AAAAI"));
+        System.out.print(commonLastVowel("OOI UUI EEI AAAAI"));
     }
     public static String commonLastVowel (String str) {
         str = str.toLowerCase().replaceAll("[,.!?:;-]+", "");

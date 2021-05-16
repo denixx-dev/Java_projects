@@ -11,12 +11,7 @@ public class Task10 {
         StringBuilder strBuild = new StringBuilder();
         HashMap<Character, Integer> chrHash = new HashMap<>();
         ArrayList<Character> chrArr = new ArrayList<>();
-        /*for (int i=0; i<str.length(); i++) {
-            if (!chrHash.containsKey(str.charAt(i))){
-                chrHash.put(str.charAt(i),i);
-                strBuild.append(str.charAt(i));
-            }
-        }*/
+
         for (int i=0; i< str.length(); i++) {
             if (!chrArr.contains(str.charAt(i))) {
                 chrArr.add(str.charAt(i));
