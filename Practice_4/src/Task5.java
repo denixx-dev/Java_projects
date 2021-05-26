@@ -16,10 +16,10 @@ public class Task5 {
                 splitStr[i] = "Ecks";
             }
             if (splitStr[i].startsWith("x")) {
-                splitStr[i] = splitStr[i].replaceFirst("x","z");
+                splitStr[i] = splitStr[i].replace("x","z");
             }
             if (splitStr[i].startsWith("X")) {
-                splitStr[i] = splitStr[i].replaceFirst("X","Z");
+                splitStr[i] = splitStr[i].replace("X","Z");
             }
             splitStr[i] = splitStr[i].replace("x","cks");
         }

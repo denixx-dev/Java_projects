@@ -5,7 +5,7 @@ import java.util.Collections;
 public class Task6 {
     public static void main(String[] args){
 
-        int[] intArr = new int[]{14, 13, 7, 1, 4, 12, 3, 7, 7, 12, 11, 5, 7};
+        int[] intArr = new int[]{13, 3, 8, 5, 5, 2, 13, 6, 14, 2, 11, 4, 10, 8, 1, 9};
 
         System.out.println(largestGap(intArr));
 
